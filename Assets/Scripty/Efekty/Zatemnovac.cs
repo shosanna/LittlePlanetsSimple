@@ -6,11 +6,11 @@ public class Zatemnovac : MonoBehaviour {
 
     void Update() {
         if (Den.Noc()) {
-            Material.SetFloat("_Magnitude", 0.4f);
+            Material.SetFloat("_Magnitude", 0.1f);
         } else if (Den.Vecer()) {
-            Material.SetFloat("_Magnitude", 0.65f);
+            Material.SetFloat("_Magnitude", 0.45f);
         } else if (Den.Odpoledne()) {
-            Material.SetFloat("_Magnitude", 0.85f);
+            Material.SetFloat("_Magnitude", 0.75f);
         } else {
             Material.SetFloat("_Magnitude", 1f);
         }

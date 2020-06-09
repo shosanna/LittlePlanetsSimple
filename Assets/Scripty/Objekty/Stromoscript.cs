@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Coords;
-using Assets.Scripty;
-using Pada1.Xml.Serializer.Utils;
 using UnityEditor;
-using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Poctoscript))]
@@ -20,7 +15,6 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _hrac;
     public PolarCoord PolarStromu;
     private Poctoscript _poctoscript;
-    private Sprite _defaultniStrom;
 
     // Use this for initialization
     void Start() {
@@ -38,6 +32,7 @@ public class Stromoscript : MonoBehaviour {
         } else {
             ZrusNapovedu();
             _animator.enabled = false;
+            //GetComponent<MeshRenderer>().enabled = false;
         }
     }
 
@@ -59,8 +54,6 @@ public class Stromoscript : MonoBehaviour {
                 var v = _hrac.transform.localPosition;
 
                 float det = u.x * v.y - v.x * u.y;
-
-                _hrac.GetComponent<SpriteRenderer>().flipX = det > 0;
             }
 
             _poctoscript.Kapacita--;

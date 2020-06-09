@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
    
-        PolarCoord = new PolarCoord(1, Radius);
+        PolarCoord = new PolarCoord(Radius, 1.50f);
         
 
         _anim = GetComponent<Animator>();
@@ -57,10 +57,6 @@ public class PlayerController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
-            _anim.SetTrigger("Trhej"); // Na konci animace se vola Trhani()
-        }
-
         // beh
         if (Input.GetKey(KeyCode.LeftShift)) {
             speed = 3;
@@ -74,8 +70,8 @@ public class PlayerController : MonoBehaviour {
             PolarCoord.R = Radius;
         }
 
-        // 0.68 je radius originalni planety, toto upravi rychlost pro jinak velke planety
-        PolarCoord.Phi += -movement * (Mathf.PI / speed) * Time.deltaTime * 0.68f / Radius;
+        // 0.54 je radius originalni planety, toto upravi rychlost pro jinak velke planety
+        PolarCoord.Phi += -movement * (Mathf.PI / speed) * Time.deltaTime * 0.54f / Radius;
         // oprava polarnich souradnic pro chuzi po jizni polokouli
         if (PolarCoord.Phi < 0) {
             PolarCoord.Phi = PolarCoord.Phi + (2 * Mathf.PI);
@@ -108,13 +104,6 @@ public class PlayerController : MonoBehaviour {
             StartCoroutine(Neshake());
             shake = true;
             _cilAkce.GetComponent<Stromoscript>().Seknuto();
-        }
-    }
-
-    // Je volano na konci animace
-    public void Trhani() {
-        if (_cilAkce != null && _cilAkce.GetComponent<Keroscript>() != null) {
-            _cilAkce.GetComponent<Keroscript>().Trhani();
         }
     }
 

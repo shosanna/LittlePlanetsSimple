@@ -27,8 +27,6 @@ public class GameState : MonoBehaviour {
         get { return _instance; }
     }
 
-    public Sprite DefaultniDrevoObrazek;
-    public Sprite DefaultniBoruvkoObrazek;
 
     void Start() {
         AudioManager = new AudioManager(GetComponents<AudioSource>());
