@@ -9,28 +9,20 @@ public class PlayerController : MonoBehaviour {
     private Animator _anim;
 
     public Transform cameraTransform;
-    public Transform branoTransform;
     public float Radius;
     public float yVelocity = 0;
     public float speed = 5;
     public PolarCoord PolarCoord;
     private GameObject _cilAkce;
-    private SpriteRenderer _renderer;
 
     private bool _isGrounded = true;
 
     private void Start() {
-        // postava zacina na brane krom poprve (pro tutorial)
-        if (branoTransform) {
-            var cartesianBrano = new CartesianCoord(branoTransform.transform.localPosition.x,
-                branoTransform.transform.localPosition.y);
-            PolarCoord = new PolarCoord(cartesianBrano.ToPolar().R, cartesianBrano.ToPolar().Phi);
-        } else {
-            PolarCoord = new PolarCoord(1, Radius);
-        }
+   
+        PolarCoord = new PolarCoord(1, Radius);
+        
 
         _anim = GetComponent<Animator>();
-        _renderer = GetComponent<SpriteRenderer>();
         origCamera = Camera.main.transform;
     }
 
@@ -44,10 +36,8 @@ public class PlayerController : MonoBehaviour {
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
         if (movement == 1) {
-            _renderer.flipX = false;
             _anim.SetBool("isMoving", true);
         } else if (movement == -1) {
-            _renderer.flipX = true;
             _anim.SetBool("isMoving", true);
         } else {
             _anim.SetBool("isMoving", false);

@@ -20,7 +20,6 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _hrac;
     public PolarCoord PolarStromu;
     private Poctoscript _poctoscript;
-    private SpriteRenderer _spriteRenderer;
     private Sprite _defaultniStrom;
 
     // Use this for initialization
@@ -28,8 +27,6 @@ public class Stromoscript : MonoBehaviour {
         _animator = GetComponent<Animator>();
         _sounds = new List<AudioClip> {chop1, chop2, chop3};
         _poctoscript = GetComponent<Poctoscript>();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-        _defaultniStrom = _spriteRenderer.sprite;
         PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
     }
 
@@ -38,16 +35,9 @@ public class Stromoscript : MonoBehaviour {
             
         if (_poctoscript && _poctoscript.Kapacita > 0) {
             _animator.enabled = true;
-            _spriteRenderer.sprite = _defaultniStrom;
         } else {
             ZrusNapovedu();
             _animator.enabled = false;
-            _spriteRenderer.sprite = Resources.Load<Sprite>("Sprity/suchy parez");
-
-            // TODO: FUJ! Oprava pro moc velkou planetu
-            if (SceneManager.GetActiveScene().name == "planet3") {
-                PolarStromu.R = 1.22f;
-            }
         }
     }
 
