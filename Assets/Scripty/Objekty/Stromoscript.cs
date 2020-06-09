@@ -32,7 +32,7 @@ public class Stromoscript : MonoBehaviour {
         } else {
             ZrusNapovedu();
             _animator.enabled = false;
-            //GetComponent<MeshRenderer>().enabled = false;
+            gameObject.SetActive(false);
         }
     }
 

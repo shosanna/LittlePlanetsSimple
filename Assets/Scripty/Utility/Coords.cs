@@ -65,9 +65,14 @@ namespace Coords
             return new PolarCoord(r, phi);
         }
 
+        public Vector2 ToVector2()
+        {
+            return new Vector2(X, Y);
+        }
+
         public Vector3 ToVector3()
         {
-            return new Vector3(X, Y, 0);
+            return new Vector3(X, Y);
         }
     }
 }

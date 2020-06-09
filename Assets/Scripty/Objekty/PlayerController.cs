@@ -75,7 +75,8 @@ public class PlayerController : MonoBehaviour {
         }
         PolarCoord.Phi = PolarCoord.Phi % (2 * Mathf.PI);
 
-        transform.localPosition = PolarCoord.ToCartesian().ToVector3();
+        Vector2 x = PolarCoord.ToCartesian().ToVector2();
+        transform.localPosition = new Vector3(x.x, x.y, transform.localPosition.z);
 
         // nataceni spritu
         transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
@@ -89,10 +90,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
-    void OnDrawGizmos() {
-        Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
-    }
 
     // Je volano na konci animace
     public void Seknuto() {
