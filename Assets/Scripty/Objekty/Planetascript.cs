@@ -6,8 +6,6 @@ using UnityEngine.SceneManagement;
 
 public class Planetascript : MonoBehaviour {
 
-    // UI Casovac
-
     private Destovac _destovac;
 
     void Start () {
