@@ -3,10 +3,8 @@ using UnityEngine;
 using Coords;
 using UnityEditor;
 
-[RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Poctoscript))]
 public class Stromoscript : MonoBehaviour {
-    private Animator _animator;
     private bool _moznoSekat = false;
     public AudioClip chop1;
     public AudioClip chop2;
@@ -19,7 +17,6 @@ public class Stromoscript : MonoBehaviour {
 
     // Use this for initialization
     void Start() {
-        _animator = GetComponent<Animator>();
         _sounds = new List<AudioClip> {chop1, chop2, chop3};
         _poctoscript = GetComponent<Poctoscript>();
         PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
@@ -28,14 +25,6 @@ public class Stromoscript : MonoBehaviour {
     private void Update() {
         transform.position = PolarStromu.ToCartesian().ToVector3();
             
-        if (_poctoscript && _poctoscript.Kapacita > 0) {
-            _animator.enabled = true;
-        } else {
-            ZrusNapovedu();
-            _animator.enabled = false;
-        }
-
-
         if (_poctoscript.Kapacita == 0 && _active)
         {
             GameObject.Find("Stump").SetActive(false);
@@ -64,7 +53,6 @@ public class Stromoscript : MonoBehaviour {
             }
 
             _poctoscript.Kapacita--;
-            _animator.SetTrigger("Chop");
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];

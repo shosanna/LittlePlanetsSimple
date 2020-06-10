@@ -4,10 +4,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-[RequireComponent(typeof(Animator))]
-public class PlayerController : MonoBehaviour {
-    private Animator _anim;
 
+public class PlayerController : MonoBehaviour {
     public Transform cameraTransform;
     public float Radius;
     public float yVelocity = 0;
@@ -20,7 +18,6 @@ public class PlayerController : MonoBehaviour {
     private void Start() {
         PolarCoord = new PolarCoord(Radius, 1.50f);
 
-        _anim = GetComponent<Animator>();
         origCamera = Camera.main.transform;
     }
 
@@ -33,25 +30,19 @@ public class PlayerController : MonoBehaviour {
 
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
-        if (movement == 1) {
-            _anim.SetBool("isMoving", true);
-        } else if (movement == -1) {
-            _anim.SetBool("isMoving", true);
-        } else {
-            _anim.SetBool("isMoving", false);
-        }
-
         yVelocity -= 5 * Time.deltaTime;
 
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
             yVelocity = 1;
-            _anim.SetTrigger("Jump");
         }
 
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0) {
-                _anim.SetTrigger("Chop"); // na konci animace se vola Seknuto()
+                origCamera = Camera.main.transform;
+                StartCoroutine(Neshake());
+                shake = true;
+                _cilAkce.GetComponent<Stromoscript>().Seknuto();
             }
         }
 
@@ -91,16 +82,6 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-
-    // Je volano na konci animace
-    public void Seknuto() {
-        if (_cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
-            origCamera = Camera.main.transform;
-            StartCoroutine(Neshake());
-            shake = true;
-            _cilAkce.GetComponent<Stromoscript>().Seknuto();
-        }
-    }
 
     IEnumerator Neshake() {
         yield return new WaitForSeconds(0.07f);
