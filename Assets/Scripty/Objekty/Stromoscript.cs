@@ -15,6 +15,7 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _hrac;
     public PolarCoord PolarStromu;
     private Poctoscript _poctoscript;
+    private bool _active = true;
 
     // Use this for initialization
     void Start() {
@@ -32,7 +33,13 @@ public class Stromoscript : MonoBehaviour {
         } else {
             ZrusNapovedu();
             _animator.enabled = false;
-            gameObject.SetActive(false);
+        }
+
+
+        if (_poctoscript.Kapacita == 0 && _active)
+        {
+            GameObject.Find("Stump").SetActive(false);
+            _active = false;
         }
     }
 
@@ -61,7 +68,7 @@ public class Stromoscript : MonoBehaviour {
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
-
+            GameObject.Find("poof").GetComponent<ParticleSystem>().Play();
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
     }

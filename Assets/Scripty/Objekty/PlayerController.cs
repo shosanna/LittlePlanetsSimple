@@ -18,7 +18,8 @@ public class PlayerController : MonoBehaviour {
     private bool _isGrounded = true;
 
     private void Start() {
-        //PolarCoord = new PolarCoord(Radius, 1.50f);
+        PolarCoord = new PolarCoord(Radius, 1.50f);
+
         _anim = GetComponent<Animator>();
         origCamera = Camera.main.transform;
     }
