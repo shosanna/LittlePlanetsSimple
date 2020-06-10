@@ -12,8 +12,10 @@ using UnityEngine.SceneManagement;
 public class GameState : MonoBehaviour {
     // Core
     private static GameState _instance = null;
-
+    private int _totalTrees;
+    private int _currentTrees;
     public AudioManager AudioManager;
+
 
 
     // Casovac
@@ -29,6 +31,7 @@ public class GameState : MonoBehaviour {
 
 
     void Start() {
+        _totalTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         AudioManager = new AudioManager(GetComponents<AudioSource>());
         AudioManager.PustHudbu();
     }
@@ -47,7 +50,7 @@ public class GameState : MonoBehaviour {
     }
 
     private void Update() {
-        // Casovac
+        _currentTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         UbehlyCas += Time.deltaTime;
         _procentoDne = (float) Math.Round(UbehlyCas / _delkaDne, 2);
     }
@@ -56,6 +59,11 @@ public class GameState : MonoBehaviour {
         UbehlyCas = 0;
         _den++;
         Debug.Log("Den: " + _den);
+
+        if (_currentTrees > 0)
+        {
+            print("PROHRA");
+        }
     }
 
     public float ProcentoDne() {

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using DG.Tweening;
 
 
 public class PlayerController : MonoBehaviour {
@@ -17,8 +18,6 @@ public class PlayerController : MonoBehaviour {
 
     private void Start() {
         PolarCoord = new PolarCoord(Radius, 1.50f);
-
-        origCamera = Camera.main.transform;
     }
 
     void Update() {
@@ -37,11 +36,10 @@ public class PlayerController : MonoBehaviour {
             yVelocity = 1;
         }
 
+        // SEKANI
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0) {
-                origCamera = Camera.main.transform;
-                StartCoroutine(Neshake());
-                shake = true;
+                Camera.main.transform.DOShakePosition(1, strength: .01f);
                 _cilAkce.GetComponent<Stromoscript>().Seknuto();
             }
         }
@@ -72,24 +70,7 @@ public class PlayerController : MonoBehaviour {
 
         // nataceni spritu
         transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
-
-        // shake obrazovky pri sekani stromu
-        if (shake) {
-            float shakeOffset = Random.RandomRange(0, 0.015f);
-            Camera.main.transform.position = origCamera.position + new Vector3(shakeOffset, shakeOffset, shakeOffset);
-        } else {
-            Camera.main.transform.position = origCamera.position;
-        }
     }
-
-
-    IEnumerator Neshake() {
-        yield return new WaitForSeconds(0.07f);
-        shake = false;
-    }
-
-    Transform origCamera;
-    bool shake = false;
 
     public void NastavCil(GameObject cil) {
         _cilAkce = cil;

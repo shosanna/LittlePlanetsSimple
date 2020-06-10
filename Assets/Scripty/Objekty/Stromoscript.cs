@@ -2,6 +2,7 @@
 using UnityEngine;
 using Coords;
 using UnityEditor;
+using DG.Tweening;
 
 [RequireComponent(typeof(Poctoscript))]
 public class Stromoscript : MonoBehaviour {
@@ -14,10 +15,12 @@ public class Stromoscript : MonoBehaviour {
     public PolarCoord PolarStromu;
     private Poctoscript _poctoscript;
     private bool _active = true;
+    private GameObject _stump;
 
     // Use this for initialization
     void Start() {
         _sounds = new List<AudioClip> {chop1, chop2, chop3};
+        _stump = GameObject.Find("Stump");
         _poctoscript = GetComponent<Poctoscript>();
         PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
     }
@@ -27,7 +30,7 @@ public class Stromoscript : MonoBehaviour {
             
         if (_poctoscript.Kapacita == 0 && _active)
         {
-            GameObject.Find("Stump").SetActive(false);
+            _stump.SetActive(false);
             _active = false;
         }
     }
@@ -43,12 +46,14 @@ public class Stromoscript : MonoBehaviour {
         if (_moznoSekat) {
             ZrusNapovedu();
 
+            _stump.transform.DORewind(false);
+            _stump.transform.DOShakeScale(0.3f, 0.4f);
+
             // otoceni hrace pri sekani (aby sekal do spravne strany)
             if (_hrac != null && _moznoSekat)
             {
                 var u = transform.localPosition;
                 var v = _hrac.transform.localPosition;
-
                 float det = u.x * v.y - v.x * u.y;
             }
 
