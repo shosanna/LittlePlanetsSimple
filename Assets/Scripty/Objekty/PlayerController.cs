@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour {
     private bool _isGrounded = true;
 
     private void Start() {
-        PolarCoord = new PolarCoord(Radius, 1.50f);
+        PolarCoord = new PolarCoord(Radius, 1.58f);
     }
 
     void Update() {
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour {
 
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
-            yVelocity = 1;
+            yVelocity = 1.2f;
         }
 
         // SEKANI

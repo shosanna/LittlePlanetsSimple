@@ -52,6 +52,7 @@ public class Stromoscript : MonoBehaviour {
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
+            
             GameObject.Find("poof").GetComponent<ParticleSystem>().Play();
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
