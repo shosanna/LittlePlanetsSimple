@@ -20,7 +20,7 @@ public class Stromoscript : MonoBehaviour {
     // Use this for initialization
     void Start() {
         _sounds = new List<AudioClip> {chop1, chop2, chop3};
-        _stump = GameObject.Find("Stump");
+        _stump = GetComponentInChildren<Stump>().gameObject;
         _poctoscript = GetComponent<Poctoscript>();
         PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
     }
@@ -53,7 +53,7 @@ public class Stromoscript : MonoBehaviour {
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
             
-            GameObject.Find("poof").GetComponent<ParticleSystem>().Play();
+            GetComponentInChildren<ParticleSystem>().Play();
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
     }
