@@ -27,7 +27,6 @@ public class Stromoscript : MonoBehaviour {
 
     private void Update() {
         transform.position = PolarStromu.ToCartesian().ToVector3();
-            
         if (_poctoscript.Kapacita == 0 && _active)
         {
             _stump.SetActive(false);
@@ -48,14 +47,6 @@ public class Stromoscript : MonoBehaviour {
 
             _stump.transform.DORewind(false);
             _stump.transform.DOShakeScale(0.3f, 0.4f);
-
-            // otoceni hrace pri sekani (aby sekal do spravne strany)
-            if (_hrac != null && _moznoSekat)
-            {
-                var u = transform.localPosition;
-                var v = _hrac.transform.localPosition;
-                float det = u.x * v.y - v.x * u.y;
-            }
 
             _poctoscript.Kapacita--;
             var rnd = new System.Random();
