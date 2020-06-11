@@ -9,8 +9,7 @@ public class CowController : MonoBehaviour {
 
     void Start () {
         // Radius of the planet
-        PolarCoord.R = 0.64f;
-        _napovedaAnimator = transform.Find("NapovedaNeedPapik").GetComponent<Animator>();
+        PolarCoord.R = 0.54f;
     }
 	
 	void Update () {
@@ -23,16 +22,8 @@ public class CowController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "postava" && _napovedaAnimator) {
-            _napovedaAnimator.SetBool("NeedPapik", true);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.gameObject.name == "postava" && _napovedaAnimator)
-        {
-            _napovedaAnimator.SetBool("NeedPapik", false);
+        if (collision.gameObject.name == "Player") {
+            print("muu");
         }
     }
 }
