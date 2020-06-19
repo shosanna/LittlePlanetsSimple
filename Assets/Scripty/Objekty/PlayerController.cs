@@ -24,22 +24,19 @@ public class PlayerController : MonoBehaviour {
         // pro dvoj hopik
         _isGrounded = PolarCoord.R > Radius;
 
-        // sledovani hrace
-        cameraTransform.position = new Vector3(transform.position.x, transform.position.y, cameraTransform.position.z);
-
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
         yVelocity -= 5 * Time.deltaTime;
 
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded) {
-            yVelocity = 1.2f;
+            yVelocity = 1.6f;
         }
 
         // SEKANI
         if (Input.GetKeyDown(KeyCode.X) && _cilAkce != null && _cilAkce.GetComponent<Stromoscript>() != null) {
             if (_cilAkce.GetComponent<Poctoscript>().Kapacita > 0) {
-                Camera.main.transform.DOShakePosition(1, strength: .01f);
+                Camera.main.GetComponent<CameraScript>().Shake();
                 _cilAkce.GetComponent<Stromoscript>().Seknuto();
             }
         }

@@ -17,7 +17,6 @@ public class GameState : MonoBehaviour {
     public AudioManager AudioManager;
 
 
-
     // Casovac
     public float UbehlyCas = 0f;
 

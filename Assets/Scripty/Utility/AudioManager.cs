@@ -16,8 +16,6 @@ namespace Assets.Scripty {
             _audioSourceHudba = audioSource[1];
             _audioSourceZvuky = audioSource[2];
             
-            //public List<AudioClip> Hudba = new List<AudioClip>();
-
             string[] soundtrack = new[] {
                 "Audio/Music/uvodni2",
                 "Audio/Music/lala",
