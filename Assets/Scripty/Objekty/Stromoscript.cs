@@ -5,7 +5,8 @@ using UnityEditor;
 using DG.Tweening;
 
 [RequireComponent(typeof(Poctoscript))]
-public class Stromoscript : MonoBehaviour {
+public class Stromoscript : MonoBehaviour
+{
     private bool _moznoSekat = false;
     public AudioClip chop1;
     public AudioClip chop2;
@@ -18,14 +19,16 @@ public class Stromoscript : MonoBehaviour {
     private GameObject _stump;
 
     // Use this for initialization
-    void Start() {
-        _sounds = new List<AudioClip> {chop1, chop2, chop3};
+    void Start()
+    {
+        _sounds = new List<AudioClip> { chop1, chop2, chop3 };
         _stump = GetComponentInChildren<Stump>().gameObject;
         _poctoscript = GetComponent<Poctoscript>();
         PolarStromu = new CartesianCoord(transform.position.x, transform.position.y).ToPolar();
     }
 
-    private void Update() {
+    private void Update()
+    {
         transform.position = PolarStromu.ToCartesian().ToVector3();
         if (_poctoscript.Kapacita == 0 && _active)
         {
@@ -35,14 +38,17 @@ public class Stromoscript : MonoBehaviour {
     }
 
     // Kdyz se trigne kolize (s hracem)
-    private void OnTriggerEnter2D(Collider2D collision) {
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
         _hrac = collision.gameObject;
         _hrac.GetComponent<PlayerController>().NastavCil(this.gameObject);
         _moznoSekat = true;
     }
 
-    public void Seknuto() {
-        if (_moznoSekat) {
+    public void Seknuto()
+    {
+        if (_moznoSekat)
+        {
             ZrusNapovedu();
 
             _stump.transform.DORewind(false);
@@ -52,13 +58,14 @@ public class Stromoscript : MonoBehaviour {
             var rnd = new System.Random();
             int index = rnd.Next(_sounds.Count - 1);
             var sound = _sounds[index];
-            
+
             GetComponentInChildren<ParticleSystem>().Play();
             GameState.Instance.AudioManager.ZahrajZvuk(sound);
         }
     }
 
-    private void ZrusNapovedu() {
+    private void ZrusNapovedu()
+    {
         var napoveda = GetComponentInChildren<Napovedascript>();
         if (napoveda != null)
         {
@@ -67,25 +74,32 @@ public class Stromoscript : MonoBehaviour {
     }
 
     // Kdyz se trigne kolize (s hracem)
-    private void OnTriggerExit2D(Collider2D collision) {
-        if (_hrac) {
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (_hrac)
+        {
             _hrac.GetComponent<PlayerController>().ZrusCil();
             _hrac = null;
             _moznoSekat = false;
         }
     }
 
-    public void OnDrawGizmos() {
-        if (_poctoscript) {
+    public void OnDrawGizmos()
+    {
+        if (_poctoscript)
+        {
             var style = new GUIStyle();
             style.normal.textColor = Color.white;
             style.fontSize = 20;
             Handles.Label(transform.position, string.Format("{0}", _poctoscript.Kapacita), style);
         }
 
-        if (_moznoSekat) {
+        if (_moznoSekat)
+        {
             Handles.color = Color.green;
-        } else {
+        }
+        else
+        {
             Handles.color = Color.red;
         }
         Handles.DrawSolidDisc(transform.position, Vector3.back, 0.03f);

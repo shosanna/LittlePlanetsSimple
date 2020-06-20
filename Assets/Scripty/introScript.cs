@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class introScript : MonoBehaviour
 {
@@ -8,7 +9,15 @@ public class introScript : MonoBehaviour
 
     public void StartButton()
     {
-        print("fpoop");
+        StartCoroutine(DelayedLoad());
+    }
+
+
+    IEnumerator DelayedLoad()
+    {
         GameState.Instance.AudioManager.ZahrajZvuk(Sound);
+        yield return new WaitForSeconds(Sound.length);
+        SceneManager.LoadScene("planet1");
+
     }
 }

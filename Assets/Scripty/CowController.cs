@@ -3,25 +3,28 @@ using System.Collections.Generic;
 using Coords;
 using UnityEngine;
 
-public class CowController : MonoBehaviour {
+public class CowController : MonoBehaviour
+{
     public PolarCoord PolarCoord;
     private Animator _napovedaAnimator;
     private bool _alive = true;
-
-    void Start () {
+    public AudioClip boom;
+    void Start()
+    {
         // Radius of the planet
         PolarCoord.R = 0.54f;
     }
-	
-	void Update () {
+
+    void Update()
+    {
         if (_alive)
         {
             PolarCoord.Phi += 0.003f;
         }
 
         transform.localPosition = PolarCoord.ToCartesian().ToVector3();
-	    // nataceni spritu
-	    transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
+        // nataceni spritu
+        transform.rotation = Quaternion.EulerRotation(0, 0, PolarCoord.Phi - Mathf.PI / 2);
 
         if (!_alive && !GetComponentInChildren<ParticleSystem>().isPlaying)
         {
@@ -32,8 +35,9 @@ public class CowController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name == "Player") {
-            print("muu");
+        if (collision.gameObject.name == "Player")
+        {
+            GameState.Instance.AudioManager.ZahrajZvuk(boom);
             _alive = false;
             GetComponentInChildren<ParticleSystem>().Play();
             GetComponent<MeshRenderer>().enabled = false;

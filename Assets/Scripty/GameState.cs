@@ -9,7 +9,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(AudioSource))]
-public class GameState : MonoBehaviour {
+public class GameState : MonoBehaviour
+{
     // Core
     private static GameState _instance = null;
     private int _totalTrees;
@@ -24,23 +25,29 @@ public class GameState : MonoBehaviour {
     private float _delkaDne = 30f;
     private float _procentoDne = 0f;
 
-    public static GameState Instance {
+    public static GameState Instance
+    {
         get { return _instance; }
     }
 
 
-    void Start() {
+    void Start()
+    {
         _totalTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         AudioManager = new AudioManager(GetComponents<AudioSource>());
         AudioManager.PustHudbu();
     }
 
-    void Awake() {
+    void Awake()
+    {
         // Hned znic jine instance GameState - tento musi byt unikantni (Singleton)
-        if (_instance != null && _instance != this) {
+        if (_instance != null && _instance != this)
+        {
             Destroy(this.gameObject);
             return;
-        } else {
+        }
+        else
+        {
             _instance = this;
         }
 
@@ -48,13 +55,20 @@ public class GameState : MonoBehaviour {
         DontDestroyOnLoad(transform.gameObject);
     }
 
-    private void Update() {
+    private void Update()
+    {
         _currentTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         UbehlyCas += Time.deltaTime;
-        _procentoDne = (float) Math.Round(UbehlyCas / _delkaDne, 2);
+        _procentoDne = (float)Math.Round(UbehlyCas / _delkaDne, 2);
+
+        if (Input.GetKeyDown("r"))
+        {
+            SceneManager.LoadScene("planet1");
+        }
     }
 
-    public void NastavKonecDne() {
+    public void NastavKonecDne()
+    {
         UbehlyCas = 0;
         _den++;
         Debug.Log("Den: " + _den);
@@ -65,15 +79,18 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    public float ProcentoDne() {
+    public float ProcentoDne()
+    {
         return _procentoDne;
     }
 
-    public int Den() {
+    public int Den()
+    {
         return _den;
     }
 
-    public void NastavDen(int den) {
+    public void NastavDen(int den)
+    {
         _den = den;
     }
 }
