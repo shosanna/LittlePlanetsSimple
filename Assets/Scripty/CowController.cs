@@ -42,6 +42,7 @@ public class CowController : MonoBehaviour
             GetComponentInChildren<ParticleSystem>().Play();
             GetComponent<MeshRenderer>().enabled = false;
             collision.gameObject.SetActive(false);
+            GameState.Instance.GameOver();
         }
     }
 }

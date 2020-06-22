@@ -16,6 +16,7 @@ public class GameState : MonoBehaviour
     private int _totalTrees;
     private int _currentTrees;
     public AudioManager AudioManager;
+    public GameObject GameOverUI;
 
 
     // Casovac
@@ -63,6 +64,7 @@ public class GameState : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
+            ResetCasu();
             SceneManager.LoadScene("planet1");
         }
     }
@@ -79,6 +81,13 @@ public class GameState : MonoBehaviour
         }
     }
 
+    public void GameOver()
+    {
+        ResetCasu();
+        //SceneManager.LoadScene("planet1");
+        GameOverUI.SetActive(true);
+    }
+
     public float ProcentoDne()
     {
         return _procentoDne;
@@ -92,5 +101,11 @@ public class GameState : MonoBehaviour
     public void NastavDen(int den)
     {
         _den = den;
+    }
+
+    public void ResetCasu()
+    {
+        _den = 0;
+        UbehlyCas = 0;
     }
 }
