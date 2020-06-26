@@ -1,23 +1,16 @@
 ﻿using Assets.Scripty;
 using System;
-using System.IO;
-using System.Runtime.Serialization.Formatters;
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(AudioSource))]
 public class GameState : MonoBehaviour
 {
     // Core
     private static GameState _instance = null;
-    private int _totalTrees;
-    private int _currentTrees;
     public AudioManager AudioManager;
-    public GameObject GameOverUI;
-
 
     // Casovac
     public float UbehlyCas = 0f;
@@ -25,6 +18,7 @@ public class GameState : MonoBehaviour
     private int _den = 0;
     private float _delkaDne = 30f;
     private float _procentoDne = 0f;
+
 
     public static GameState Instance
     {
@@ -34,7 +28,6 @@ public class GameState : MonoBehaviour
 
     void Start()
     {
-        _totalTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         AudioManager = new AudioManager(GetComponents<AudioSource>());
         AudioManager.PustHudbu();
     }
@@ -58,7 +51,6 @@ public class GameState : MonoBehaviour
 
     private void Update()
     {
-        _currentTrees = GameObject.FindGameObjectsWithTag("Strom").Length;
         UbehlyCas += Time.deltaTime;
         _procentoDne = (float)Math.Round(UbehlyCas / _delkaDne, 2);
 
@@ -74,18 +66,14 @@ public class GameState : MonoBehaviour
         UbehlyCas = 0;
         _den++;
         Debug.Log("Den: " + _den);
-
-        if (_currentTrees > 0)
-        {
-            print("PROHRA");
-        }
     }
 
     public void GameOver()
     {
         ResetCasu();
+        GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayGameOver();
         //SceneManager.LoadScene("planet1");
-        GameOverUI.SetActive(true);
+        //StartCoroutine(DelayedLoad());
     }
 
     public float ProcentoDne()
