@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     public Transform cameraTransform;
     public float Radius;
     public float yVelocity = 0;
-    public float speed = 5;
+    public float speed = 7;
     public PolarCoord PolarCoord;
     private GameObject _cilAkce;
 
@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
 
         // pohyb
         var movement = Input.GetAxisRaw("Horizontal");
-        yVelocity -= 5 * Time.deltaTime;
+        yVelocity -= speed * Time.deltaTime;
 
 
         if (Input.GetKeyDown(KeyCode.Space) && !_isGrounded)
@@ -48,15 +48,6 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // beh
-        if (Input.GetKey(KeyCode.LeftShift))
-        {
-            speed = 3;
-        }
-        else
-        {
-            speed = 10;
-        }
 
         PolarCoord.R += yVelocity * Time.deltaTime;
         if (PolarCoord.R < Radius)

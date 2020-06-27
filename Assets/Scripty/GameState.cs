@@ -56,8 +56,7 @@ public class GameState : MonoBehaviour
 
         if (Input.GetKeyDown("r"))
         {
-            ResetCasu();
-            SceneManager.LoadScene("planet1");
+            Restart();
         }
     }
 
@@ -73,7 +72,18 @@ public class GameState : MonoBehaviour
         ResetCasu();
         GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayGameOver();
         //SceneManager.LoadScene("planet1");
-        //StartCoroutine(DelayedLoad());
+    }
+
+    public void Restart()
+    {
+        ResetCasu();
+        SceneManager.LoadScene("planet1");
+    }
+
+    public void ToMainMenu()
+    {
+        ResetCasu();
+        SceneManager.LoadScene("intro");
     }
 
     public float ProcentoDne()
