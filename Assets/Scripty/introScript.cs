@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class introScript : MonoBehaviour
+public class IntroScript : MonoBehaviour
 {
     public AudioClip Sound;
 

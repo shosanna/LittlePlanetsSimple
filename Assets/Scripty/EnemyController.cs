@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using Coords;
 using UnityEngine;
 
-public class CowController : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     public PolarCoord PolarCoord;
     private Animator _napovedaAnimator;
     private bool _alive = true;
     public AudioClip boom;
+
+    public float Radius;
     void Start()
     {
         // Radius of the planet
-        PolarCoord.R = 0.54f;
+        PolarCoord.R = Radius;
     }
 
     void Update()

@@ -75,12 +75,14 @@ public class GameState : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         ResetCasu();
         SceneManager.LoadScene("planet1");
     }
 
     public void Continue()
     {
+        Time.timeScale = 1;
         ResetCasu();
         SceneManager.LoadScene("planet2");
     }

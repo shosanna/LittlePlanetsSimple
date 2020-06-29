@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
         }
 
         // 0.54 je radius originalni planety, toto upravi rychlost pro jinak velke planety
-        PolarCoord.Phi += -movement * (Mathf.PI / speed) * Time.deltaTime * 0.54f / Radius;
+        PolarCoord.Phi += -movement * (Mathf.PI / speed) * Time.deltaTime * 0.78f / Radius;
         // oprava polarnich souradnic pro chuzi po jizni polokouli
         if (PolarCoord.Phi < 0)
         {
@@ -80,5 +80,10 @@ public class PlayerController : MonoBehaviour
     public void ZrusCil()
     {
         _cilAkce = null;
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.parent.transform.position, Radius);
     }
 }

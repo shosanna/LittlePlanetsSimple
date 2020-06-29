@@ -4,11 +4,13 @@ using Assets.Scripty;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Planetascript : MonoBehaviour {
+public class Planetascript : MonoBehaviour
+{
 
     private Destovac _destovac;
 
-    void Start () {
+    void Start()
+    {
         // Prseni
         _destovac = Camera.main.GetComponent<Destovac>();
         _destovac.ZacniMoznaPrset();
