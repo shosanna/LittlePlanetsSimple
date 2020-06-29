@@ -15,9 +15,9 @@ public class introScript : MonoBehaviour
 
     IEnumerator DelayedLoad()
     {
+        Time.timeScale = 1;
         GameState.Instance.AudioManager.ZahrajZvuk(Sound);
         yield return new WaitForSeconds(Sound.length);
         SceneManager.LoadScene("planet1");
-
     }
 }
