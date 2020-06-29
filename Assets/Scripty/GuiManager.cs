@@ -16,7 +16,13 @@ public class GuiManager : MonoBehaviour
         _axeCount = GameObject.Find("axe count").GetComponent<Text>();
         WinUI.GetComponent<Canvas>().enabled = false;
         GameOverUI.GetComponent<Canvas>().enabled = false;
+
+        // Setup all the callbacks on all buttons
+        GameObject.Find("Restart").GetComponent<Button>().onClick.AddListener(GameState.Instance.Restart);
+        GameObject.Find("Abandon").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+        GameObject.Find("Continue").GetComponent<Button>().onClick.AddListener(GameState.Instance.Continue);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -46,7 +52,7 @@ public class GuiManager : MonoBehaviour
 
     public void DisplayWin()
     {
-        GameObject.Find("Planet").SetActive(false);
+        Time.timeScale = 0;
         _running = false;
         WinUI.GetComponent<Canvas>().enabled = true;
     }

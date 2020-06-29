@@ -71,13 +71,18 @@ public class GameState : MonoBehaviour
     {
         ResetCasu();
         GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayGameOver();
-        //SceneManager.LoadScene("planet1");
     }
 
     public void Restart()
     {
         ResetCasu();
         SceneManager.LoadScene("planet1");
+    }
+
+    public void Continue()
+    {
+        ResetCasu();
+        SceneManager.LoadScene("planet2");
     }
 
     public void ToMainMenu()
