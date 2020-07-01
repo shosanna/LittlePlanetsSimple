@@ -14,10 +14,12 @@ public class GameState : MonoBehaviour
 
     // Casovac
     public float UbehlyCas = 0f;
+    public int Level = 0;
 
     private int _den = 0;
     private float _delkaDne = 30f;
     private float _procentoDne = 0f;
+
 
 
     public static GameState Instance
@@ -84,7 +86,8 @@ public class GameState : MonoBehaviour
     {
         Time.timeScale = 1;
         ResetCasu();
-        SceneManager.LoadScene("planet2");
+        Level++;
+        SceneManager.LoadScene("planet1");
     }
 
     public void ToMainMenu()

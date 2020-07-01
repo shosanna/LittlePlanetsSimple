@@ -14,5 +14,21 @@ public class Planetascript : MonoBehaviour
         // Prseni
         _destovac = Camera.main.GetComponent<Destovac>();
         _destovac.ZacniMoznaPrset();
+
+
+        if (GameState.Instance.Level == 0)
+        {
+            GameState.Instance.GetComponent<Generator>().generateTrees(3);
+        }
+        else if (GameState.Instance.Level == 1)
+        {
+            GameState.Instance.GetComponent<Generator>().generateTrees(5);
+        }
+        else if (GameState.Instance.Level == 2)
+        {
+
+            GameState.Instance.GetComponent<Generator>().generateTrees(7);
+        }
+
     }
 }

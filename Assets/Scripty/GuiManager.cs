@@ -56,4 +56,10 @@ public class GuiManager : MonoBehaviour
         _running = false;
         WinUI.GetComponent<Canvas>().enabled = true;
     }
+
+    public void HideWin()
+    {
+        //_running = true;
+        WinUI.GetComponent<Canvas>().enabled = false;
+    }
 }
