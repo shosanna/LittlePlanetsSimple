@@ -16,7 +16,7 @@ public class Generator : MonoBehaviour
             if (phi != null)
             {
                 print(phi.Value);
-                Vector3 pos = new PolarCoord(0.54f + 0.17f, phi.Value).ToCartesian().ToVector3();
+                Vector3 pos = new PolarCoord(0.54f + 0.19f, phi.Value).ToCartesian().ToVector3();
                 Instantiate(Resources.Load("Prefaby/Tree"), pos, Quaternion.identity);
                 _treePhis.Add(phi.Value);
             }
@@ -33,7 +33,7 @@ public class Generator : MonoBehaviour
         int maxIter = 100;
         while (maxIter-- > 0)
         {
-            float phi = Random.Range(1.0f, 9.9f);
+            float phi = Random.Range(2.0f, 8.9f);
 
             if (!_treePhis.Any(x => (x - 1f) < phi && phi < (x + 1f)))
             {

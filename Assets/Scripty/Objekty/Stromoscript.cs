@@ -29,7 +29,9 @@ public class Stromoscript : MonoBehaviour
 
     private void Update()
     {
-        transform.position = PolarStromu.ToCartesian().ToVector3();
+        var xy = PolarStromu.ToCartesian().ToVector2();
+        transform.position = new Vector3(xy.x, xy.y, 12f);
+
         transform.rotation = Quaternion.EulerRotation(0, 0, PolarStromu.Phi - Mathf.PI / 2);
 
         if (_poctoscript.Kapacita == 0 && _active)
