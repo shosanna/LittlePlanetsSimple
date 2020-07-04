@@ -9,6 +9,7 @@ public class EnemyController : MonoBehaviour
     private Animator _napovedaAnimator;
     private bool _alive = true;
     public AudioClip boom;
+    public float speed = 0.005f;
 
     public float Radius;
     void Start()
@@ -21,7 +22,7 @@ public class EnemyController : MonoBehaviour
     {
         if (_alive)
         {
-            PolarCoord.Phi += 0.003f;
+            PolarCoord.Phi += speed;
         }
 
         transform.localPosition = PolarCoord.ToCartesian().ToVector3();
