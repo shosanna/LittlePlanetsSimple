@@ -15,7 +15,6 @@ public class Generator : MonoBehaviour
             float? phi = generateValidPhi();
             if (phi != null)
             {
-                print(phi.Value);
                 Vector3 pos = new PolarCoord(0.54f + 0.17f, phi.Value).ToCartesian().ToVector3();
                 GameObject tree = (GameObject)Instantiate(Resources.Load("Prefaby/Tree"), pos, Quaternion.identity);
                 _treePhis.Add(phi.Value);

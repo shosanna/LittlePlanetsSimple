@@ -15,6 +15,7 @@ public class GameState : MonoBehaviour
     // Casovac
     public float UbehlyCas = 0f;
     public int Level = 0;
+    public int Theme = 1;
 
     private int _den = 0;
     private float _delkaDne = 30f;
@@ -60,6 +61,11 @@ public class GameState : MonoBehaviour
         {
             Restart();
         }
+    }
+
+    public void SetTheme(int theme)
+    {
+        Theme = theme;
     }
 
     public void NastavKonecDne()

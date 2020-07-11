@@ -24,6 +24,14 @@ public class Planetascript : MonoBehaviour
 
     void Start()
     {
+        GameObject.Find("Background").SetActive(GameState.Instance.Theme == 1);
+        if (GameState.Instance.Theme == 2)
+        {
+            var cam = GameObject.Find("Main Camera 1").GetComponent<Camera>();
+            cam.clearFlags = CameraClearFlags.SolidColor;
+            cam.backgroundColor = new Color(0.094f, 0.529f, 0.749f);
+        }
+
         List<LevelConfig> levels = new List<LevelConfig> {
             new LevelConfig(3, 2, 0.005f),
             new LevelConfig(5, 3, 0.005f),

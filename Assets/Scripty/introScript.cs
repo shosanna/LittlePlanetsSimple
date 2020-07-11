@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class IntroScript : MonoBehaviour
 {
     private bool _sound = true;
+    private int _theme = 1;
     private GameObject _soundButton;
     private GameObject _noSoundButton;
     private GameObject _blueColorButton;
@@ -22,10 +23,14 @@ public class IntroScript : MonoBehaviour
         _blueColorButton = GameObject.Find("colorBlueButton");
         _orangeColorButton = GameObject.Find("colorOrangeButton");
 
-        GameObject.Find("okButton").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+        if (SceneManager.GetActiveScene().name == "settings")
+        {
+            GameObject.Find("okButton").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+        }
+
 
         _soundButton.SetActive(false);
-        _orangeColorButton.SetActive(false);
+        _blueColorButton.SetActive(false);
 
         _sound = GameState.Instance.AudioManager.IsPlaying;
         _noSoundButton.SetActive(_sound);
@@ -61,6 +66,14 @@ public class IntroScript : MonoBehaviour
         {
             GameState.Instance.AudioManager.ZapniVse();
         }
+    }
+
+    public void ToggleSchema()
+    {
+        _theme = _theme == 1 ? 2 : 1;
+        _orangeColorButton.SetActive(_theme == 1);
+        _blueColorButton.SetActive(_theme != 1);
+        GameState.Instance.SetTheme(_theme);
     }
 
     IEnumerator DelayedLoad()
