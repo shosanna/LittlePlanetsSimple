@@ -2,20 +2,24 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Assets.Scripty {
-    public class AudioManager {
+namespace Assets.Scripty
+{
+    public class AudioManager
+    {
         private AudioSource _audioSourceEfekt;
         private AudioSource _audioSourceHudba;
         private AudioSource _audioSourceZvuky;
         private AudioClip _defaultEfekt;
+        public bool IsPlaying;
 
         private List<AudioClip> _hudba = new List<AudioClip>();
 
-        public AudioManager(AudioSource[] audioSource) {
+        public AudioManager(AudioSource[] audioSource)
+        {
             _audioSourceEfekt = audioSource[0];
             _audioSourceHudba = audioSource[1];
             _audioSourceZvuky = audioSource[2];
-            
+
             string[] soundtrack = new[] {
                 "Audio/Music/uvodni2",
                 "Audio/Music/lala",
@@ -28,7 +32,8 @@ namespace Assets.Scripty {
             _audioSourceHudba.clip = _hudba[0];
         }
 
-        public void ZmenEfektNaDefault() {
+        public void ZmenEfektNaDefault()
+        {
             _audioSourceEfekt.clip = _defaultEfekt;
         }
 
@@ -38,12 +43,15 @@ namespace Assets.Scripty {
         }
 
 
-        public void ZahrajZvuk(AudioClip clip) {
+        public void ZahrajZvuk(AudioClip clip)
+        {
             _audioSourceZvuky.PlayOneShot(clip);
         }
 
-        public void PustHudbu() {
+        public void PustHudbu()
+        {
             _audioSourceHudba.Play();
+            IsPlaying = true;
         }
 
         public void PustEfekt()
@@ -51,23 +59,45 @@ namespace Assets.Scripty {
             _audioSourceEfekt.Play();
         }
 
-        public void ZmenHudbu() {
+        public void ZmenHudbu()
+        {
             var delka = _hudba.Count;
             _audioSourceHudba.clip = _hudba[UnityEngine.Random.Range(1, delka - 1)];
+            IsPlaying = true;
         }
 
-        public void ZastavHudbu() {
+        public void ZastavHudbu()
+        {
             _audioSourceHudba.Stop();
+            IsPlaying = false;
         }
 
         public void ZastavEfekt()
         {
             _audioSourceEfekt.Stop();
+            IsPlaying = false;
         }
 
-        public void ZtlumVse(float okolik) {
+        public void ZtlumVse(float okolik)
+        {
             _audioSourceEfekt.volume = okolik;
             _audioSourceHudba.volume = okolik;
+
+        }
+
+        public void VypniVse()
+        {
+            _audioSourceEfekt.volume = 0f;
+            _audioSourceHudba.volume = 0f;
+            _audioSourceZvuky.volume = 0f;
+            IsPlaying = false;
+        }
+        public void ZapniVse()
+        {
+            _audioSourceEfekt.volume = 1f;
+            _audioSourceHudba.volume = 1f;
+            _audioSourceZvuky.volume = 1f;
+            IsPlaying = true;
         }
     }
 }

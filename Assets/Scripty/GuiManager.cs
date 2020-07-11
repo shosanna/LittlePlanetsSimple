@@ -19,7 +19,8 @@ public class GuiManager : MonoBehaviour
 
         // Setup all the callbacks on all buttons
         GameObject.Find("Restart").GetComponent<Button>().onClick.AddListener(GameState.Instance.Restart);
-        GameObject.Find("Abandon").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+        GameObject.Find("AbandonGameOver").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+        GameObject.Find("AbandonWin").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
         GameObject.Find("Continue").GetComponent<Button>().onClick.AddListener(GameState.Instance.Continue);
     }
 

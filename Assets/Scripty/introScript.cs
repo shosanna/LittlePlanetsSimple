@@ -2,16 +2,66 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class IntroScript : MonoBehaviour
 {
+    private bool _sound = true;
+    private GameObject _soundButton;
+    private GameObject _noSoundButton;
+    private GameObject _blueColorButton;
+    private GameObject _orangeColorButton;
+
     public AudioClip Sound;
+
+    void Start()
+    {
+        _soundButton = GameObject.Find("soundButton");
+        _noSoundButton = GameObject.Find("noSoundButton");
+        _blueColorButton = GameObject.Find("colorBlueButton");
+        _orangeColorButton = GameObject.Find("colorOrangeButton");
+
+        GameObject.Find("okButton").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+
+        _soundButton.SetActive(false);
+        _orangeColorButton.SetActive(false);
+
+        _sound = GameState.Instance.AudioManager.IsPlaying;
+        _noSoundButton.SetActive(_sound);
+        _soundButton.SetActive(!_sound);
+    }
 
     public void StartButton()
     {
         StartCoroutine(DelayedLoad());
     }
 
+    public void SettingsButton()
+    {
+        SceneManager.LoadScene("settings");
+    }
+
+    public void ExitButton()
+    {
+        Application.Quit();
+    }
+
+    public void ToggleSound()
+    {
+        _sound = !_sound;
+        _noSoundButton.SetActive(_sound);
+        _soundButton.SetActive(!_sound);
+
+        if (!_sound)
+        {
+            GameState.Instance.AudioManager.VypniVse();
+        }
+        else
+        {
+            GameState.Instance.AudioManager.ZapniVse();
+        }
+    }
 
     IEnumerator DelayedLoad()
     {
