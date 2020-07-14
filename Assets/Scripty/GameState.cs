@@ -56,11 +56,6 @@ public class GameState : MonoBehaviour
     {
         UbehlyCas += Time.deltaTime;
         _procentoDne = (float)Math.Round(UbehlyCas / _delkaDne, 2);
-
-        if (Input.GetKeyDown("r"))
-        {
-            Restart();
-        }
     }
 
     public void SetTheme(int theme)
@@ -83,7 +78,6 @@ public class GameState : MonoBehaviour
 
     public void Win()
     {
-        ResetCasu();
         GameObject.Find("Player").gameObject.SetActive(false);
         GameObject.Find("Enemy").gameObject.SetActive(false);
         GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayWin();
@@ -106,6 +100,7 @@ public class GameState : MonoBehaviour
 
     public void ToMainMenu()
     {
+        Level = 0;
         ResetCasu();
         SceneManager.LoadScene("intro");
     }
@@ -113,16 +108,6 @@ public class GameState : MonoBehaviour
     public float ProcentoDne()
     {
         return _procentoDne;
-    }
-
-    public int Den()
-    {
-        return _den;
-    }
-
-    public void NastavDen(int den)
-    {
-        _den = den;
     }
 
     public void ResetCasu()

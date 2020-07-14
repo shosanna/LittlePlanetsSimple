@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public class GuiManager : MonoBehaviour
 {
     private Text _axeCount;
+    private Text _levelCount;
     public GameObject GameOverUI;
     public GameObject WinUI;
     private int _totalTrees;
@@ -14,6 +15,7 @@ public class GuiManager : MonoBehaviour
     {
         _totalTrees = GameObject.FindGameObjectsWithTag("Stump").Length;
         _axeCount = GameObject.Find("axe count").GetComponent<Text>();
+        _levelCount = GameObject.Find("level count").GetComponent<Text>();
         WinUI.GetComponent<Canvas>().enabled = false;
         GameOverUI.GetComponent<Canvas>().enabled = false;
 
@@ -41,6 +43,11 @@ public class GuiManager : MonoBehaviour
             if (_axeCount)
             {
                 _axeCount.text = $"{_currentTrees}x";
+            }
+
+            if (_levelCount)
+            {
+                _levelCount.text = $"Level {GameState.Instance.Level}";
             }
         }
         else
