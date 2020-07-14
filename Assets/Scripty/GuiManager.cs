@@ -34,13 +34,28 @@ public class GuiManager : MonoBehaviour
 
             if (_currentTrees == 0)
             {
-                DisplayWin();
+                GameState.Instance.Win();
             }
 
 
             if (_axeCount)
             {
                 _axeCount.text = $"{_currentTrees}x";
+            }
+        }
+        else
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                if (_currentTrees == 0)
+                {
+                    GameState.Instance.Continue();
+                }
+                else
+                {
+                    GameState.Instance.Restart();
+                }
+
             }
         }
     }
@@ -53,7 +68,6 @@ public class GuiManager : MonoBehaviour
 
     public void DisplayWin()
     {
-        Time.timeScale = 0;
         _running = false;
         WinUI.GetComponent<Canvas>().enabled = true;
     }

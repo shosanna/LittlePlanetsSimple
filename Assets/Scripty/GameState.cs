@@ -81,6 +81,14 @@ public class GameState : MonoBehaviour
         GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayGameOver();
     }
 
+    public void Win()
+    {
+        ResetCasu();
+        GameObject.Find("Player").gameObject.SetActive(false);
+        GameObject.Find("Enemy").gameObject.SetActive(false);
+        GameObject.Find("GUIManager").GetComponent<GuiManager>().DisplayWin();
+    }
+
     public void Restart()
     {
         Time.timeScale = 1;
