@@ -26,15 +26,13 @@ public class IntroScript : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "settings")
         {
             GameObject.Find("okButton").GetComponent<Button>().onClick.AddListener(GameState.Instance.ToMainMenu);
+
+            _soundButton.SetActive(false);
+            _blueColorButton.SetActive(false);
+            _noSoundButton.SetActive(_sound);
+            _soundButton.SetActive(!_sound);
         }
-
-
-        _soundButton.SetActive(false);
-        _blueColorButton.SetActive(false);
-
         _sound = GameState.Instance.AudioManager.IsPlaying;
-        _noSoundButton.SetActive(_sound);
-        _soundButton.SetActive(!_sound);
     }
 
     public void StartButton()
