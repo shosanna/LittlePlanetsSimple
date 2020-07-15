@@ -10,6 +10,7 @@ namespace Assets.Scripty
         private AudioSource _audioSourceHudba;
         private AudioSource _audioSourceZvuky;
         private AudioClip _defaultEfekt;
+        private AudioClip _defaultHudba;
         public bool IsPlaying;
 
         private List<AudioClip> _hudba = new List<AudioClip>();
@@ -21,19 +22,28 @@ namespace Assets.Scripty
             _audioSourceZvuky = audioSource[2];
 
             string[] soundtrack = new[] {
-                "Audio/Music/2",
-                "Audio/Music/1",
+                // "Audio/Music/1",
+                // "Audio/Music/3",
+                "Audio/Music/4",
             };
 
             _hudba = soundtrack.Select(Resources.Load<AudioClip>).ToList();
             _defaultEfekt = _audioSourceEfekt.clip;
-            _audioSourceHudba.clip = _hudba[0];
+            _defaultHudba = _audioSourceHudba.clip;
         }
 
         public void ZmenEfektNaDefault()
         {
             _audioSourceEfekt.clip = _defaultEfekt;
         }
+
+        public void ZmenHudbuNaDefault()
+        {
+            ZastavHudbu();
+            _audioSourceHudba.clip = _defaultHudba;
+            PustHudbu();
+        }
+
 
         public void ZmenEfekt(AudioClip clip)
         {
@@ -59,9 +69,10 @@ namespace Assets.Scripty
 
         public void ZmenHudbu()
         {
+            ZastavHudbu();
             var delka = _hudba.Count;
-            _audioSourceHudba.clip = _hudba[UnityEngine.Random.Range(1, delka - 1)];
-            IsPlaying = true;
+            _audioSourceHudba.clip = _hudba[UnityEngine.Random.Range(0, delka)];
+            PustHudbu();
         }
 
         public void ZastavHudbu()

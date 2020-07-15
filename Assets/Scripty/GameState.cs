@@ -102,6 +102,10 @@ public class GameState : MonoBehaviour
     {
         Level = 0;
         ResetCasu();
+        if (SceneManager.GetActiveScene().name != "settings")
+        {
+            GameState.Instance.AudioManager.ZmenHudbuNaDefault();
+        }
         SceneManager.LoadScene("intro");
     }
 

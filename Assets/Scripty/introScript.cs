@@ -79,6 +79,7 @@ public class IntroScript : MonoBehaviour
         Time.timeScale = 1;
         GameState.Instance.AudioManager.ZahrajZvuk(Sound);
         yield return new WaitForSeconds(Sound.length);
+        GameState.Instance.AudioManager.ZmenHudbu();
         SceneManager.LoadScene("planet1");
     }
 }
