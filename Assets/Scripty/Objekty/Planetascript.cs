@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Coords;
 
 public class Planetascript : MonoBehaviour
 {
@@ -41,15 +42,25 @@ public class Planetascript : MonoBehaviour
             new LevelConfig(4, 4, 0.01f),
         };
 
+        if (GameState.Instance.Level == 3)
+        {
+            Instantiate(Resources.Load("Prefaby/Enemy2"));
+        }
+
         // Prseni
         _destovac = Camera.main.GetComponent<Destovac>();
         _destovac.ZacniMoznaPrset();
 
         LevelConfig config = levels[GameState.Instance.Level];
 
-        GameState.Instance.GetComponent<Generator>().generateTrees(config.treeCount);
-        setCapacity(config.capacity);
+        SetupTrees(config.treeCount, config.capacity);
         setEnemySpeed(config.enemySpeed);
+    }
+
+    public void SetupTrees(int count, int capacity)
+    {
+        GameState.Instance.GetComponent<Generator>().generateTrees(count);
+        setCapacity(capacity);
     }
 
 

@@ -21,10 +21,8 @@ namespace Assets.Scripty
             _audioSourceZvuky = audioSource[2];
 
             string[] soundtrack = new[] {
-                "Audio/Music/uvodni2",
-                "Audio/Music/lala",
-                "Audio/Music/uvodni1",
-                "Audio/Music/Hudbik"
+                "Audio/Music/2",
+                "Audio/Music/1",
             };
 
             _hudba = soundtrack.Select(Resources.Load<AudioClip>).ToList();
